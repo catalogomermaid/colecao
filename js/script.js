@@ -1,9 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- LÓGICA DO FILTRO DE CATEGORIAS ---
-    const botoesFiltro = document.querySelectorAll('.btn-categoria');
     const todosProdutos = document.querySelectorAll('.produto-card');
 
+    // --- FUNÇÃO PARA CALCULAR E EXIBIR PARCELAMENTO ---
+    function calcularParcelamento() {
+        todosProdutos.forEach(produto => {
+            const precoEl = produto.querySelector('.produto-preco');
+            const parcelamentoEl = produto.querySelector('.produto-parcelamento');
+            const precoTexto = precoEl.innerText; 
+
+            if (parcelamentoEl) { // Verifica se o elemento existe
+                if (precoTexto.includes('60,00')) {
+                    parcelamentoEl.innerText = 'R$ 65,00 parcelado em até 2x';
+                } else if (precoTexto.includes('70,00')) {
+                    parcelamentoEl.innerText = 'R$ 75,00 parcelado em até 2x';
+                } else if (precoTexto.includes('100,00')) {
+                    parcelamentoEl.innerText = 'R$ 105,00 parcelado em até 2x';
+                } else {
+                    parcelamentoEl.innerText = ''; 
+                }
+            }
+        });
+    }
+
+    calcularParcelamento();
+
+    // --- LÓGICA DO FILTRO DE CATEGORIAS ---
+    const botoesFiltro = document.querySelectorAll('.btn-categoria');
     botoesFiltro.forEach(function(botao) {
         botao.addEventListener('click', function() {
             document.querySelector('.btn-categoria.ativo').classList.remove('ativo');
@@ -21,7 +44,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- LÓGICA DO POPUP DE DETALHES DO PRODUTO (GALERIA) ---
+    // --- LÓGICA PARA PRODUTOS ESGOTADOS ---
+    todosProdutos.forEach(produtoCard => {
+        if (produtoCard.dataset.esgotado === 'true') {
+            produtoCard.classList.add('esgotado');
+            const botao = produtoCard.querySelector('.btn-detalhes');
+            if (botao) {
+                botao.innerText = 'Avise-me quando chegar';
+            }
+        }
+    });
+
+    // --- LÓGICA DO POPUP E CLIQUE NOS CARDS ---
     const linkInstagram = "https://www.instagram.com/mermaid_cajazeiras";
 
     const popupOverlay = document.getElementById('popup-overlay');
@@ -37,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const popupTitulo = document.getElementById('popup-titulo');
         const popupDescricao = document.getElementById('popup-descricao');
         const popupPreco = document.getElementById('popup-preco');
+        const popupParcelamento = document.getElementById('popup-parcelamento');
         const btnWhatsapp = document.getElementById('btn-whatsapp');
         const btnInstagram = document.getElementById('btn-instagram');
         const popupCoresContainer = document.getElementById('popup-cores-container');
@@ -46,12 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const titulo = produtoCard.querySelector('h3').innerText;
         const descricao = produtoCard.querySelector('.produto-descricao').innerText;
         const preco = produtoCard.querySelector('.produto-preco').innerText;
+        const parcelamento = produtoCard.querySelector('.produto-parcelamento').innerText;
         const cores = produtoCard.dataset.colors;
 
         popupImg.src = imgSrc;
         popupTitulo.innerText = titulo;
         popupDescricao.innerText = descricao;
         popupPreco.innerText = preco;
+        popupParcelamento.innerText = parcelamento;
 
         const nomeArquivo = imgSrc.split('/').pop(); 
         const codigoProduto = nomeArquivo.split('.').slice(0, -1).join('.'); 
@@ -83,29 +120,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- MUDANÇA PRINCIPAL AQUI ---
-    // Adiciona evento de clique para cada CARD de produto, em vez de apenas no botão
     todosProdutos.forEach((produtoCard) => {
-        produtoCard.addEventListener('click', function() {
-            // Atualiza a lista de produtos visíveis com base no filtro atual
-            produtosVisiveis = Array.from(todosProdutos).filter(p => p.style.display !== 'none');
+        produtoCard.addEventListener('click', function(event) {
+            // --- LÓGICA ATUALIZADA PARA ESGOTADOS ---
+            if (this.classList.contains('esgotado')) {
+                // Verifica se o clique foi especificamente no botão
+                if (event.target.classList.contains('btn-detalhes')) {
+                    const titulo = this.querySelector('h3').innerText;
+                    const imgSrc = this.querySelector('img').src;
+                    const nomeArquivo = imgSrc.split('/').pop();
+                    const codigoProduto = nomeArquivo.split('.').slice(0, -1).join('.');
+
+                    const mensagem = `Olá, gostaria que me avisasse quando esse modelo estiver novamente disponível!\nProduto: ${titulo} (Ref: ${codigoProduto})`;
+                    const linkWhatsapp = `https://api.whatsapp.com/send?phone=+5583991034549&text=${encodeURIComponent(mensagem)}`;
+                    
+                    window.open(linkWhatsapp, '_blank'); // Abre o WhatsApp em uma nova aba
+                }
+                // Impede a abertura do popup para qualquer outro clique
+                return; 
+            }
             
-            // Encontra o índice do produto clicado na lista de visíveis
+            // Lógica para produtos em estoque (continua a mesma)
+            produtosVisiveis = Array.from(todosProdutos).filter(p => p.style.display !== 'none' && !p.classList.contains('esgotado'));
             currentIndex = produtosVisiveis.indexOf(produtoCard);
             
+            if (currentIndex === -1) return;
+
             mostrarProduto();
             popupOverlay.style.display = 'flex';
         });
     });
 
     btnNext.addEventListener('click', function(event) {
-        event.stopPropagation(); // Impede que o clique na seta feche o popup
+        event.stopPropagation();
         currentIndex = (currentIndex + 1) % produtosVisiveis.length;
         mostrarProduto();
     });
 
     btnPrev.addEventListener('click', function(event) {
-        event.stopPropagation(); // Impede que o clique na seta feche o popup
+        event.stopPropagation();
         currentIndex = (currentIndex - 1 + produtosVisiveis.length) % produtosVisiveis.length;
         mostrarProduto();
     });

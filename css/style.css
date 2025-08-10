@@ -173,6 +173,7 @@ body {
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    position: relative;
 }
 
 .produto-card:hover {
@@ -201,7 +202,14 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--cor-azul);
-    margin: 1rem 0;
+    margin: 1rem 0 0.25rem; /* Diminuído margin-bottom */
+}
+
+/* --- NOVO ESTILO PARA O PARCELAMENTO --- */
+.produto-parcelamento {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1rem;
 }
 
 .btn-detalhes {
@@ -218,6 +226,40 @@ body {
 
 .btn-detalhes:hover {
     opacity: 0.9;
+}
+
+
+/* --- ESTILOS PARA PRODUTO ESGOTADO --- */
+.produto-card.esgotado {
+    opacity: 0.6;
+    filter: grayscale(80%);
+    cursor: not-allowed;
+}
+
+.produto-card.esgotado:hover {
+    transform: none;
+    box-shadow: var(--sombra-suave);
+}
+
+.produto-card.esgotado::after {
+    content: 'Esgotado';
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    z-index: 5;
+}
+
+.produto-card.esgotado .btn-detalhes {
+    background: #888;
+    cursor: pointer;
 }
 
 
@@ -288,7 +330,7 @@ body {
 .popup-card img {
     width: 100%;
     max-height: 400px;
-    object-fit: contain; /* <--- MUDANÇA PRINCIPAL AQUI */
+    object-fit: contain;
     border-radius: 10px;
     margin-bottom: 1rem;
 }
