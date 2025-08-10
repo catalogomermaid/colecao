@@ -52,6 +52,7 @@ body {
 .logo img {
     height: 100px; 
     display: block;
+    transition: height 0.3s ease; /* Adicionado para uma transição suave */
 }
 
 /* --- ESTILOS DOS NOVOS BOTÕES DE NAVEGAÇÃO --- */
@@ -67,8 +68,9 @@ body {
     color: var(--cor-branco);
     font-weight: 500;
     font-size: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, font-size 0.3s ease;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    white-space: nowrap; /* Impede que o texto do botão quebre a linha */
 }
 
 .btn-nav:hover {
@@ -338,7 +340,7 @@ body {
     margin-top: 2rem;
 }
 
-/* --- RESPONSIVIDADE (Mobile-First) --- */
+/* --- RESPONSIVIDADE --- */
 @media (min-width: 600px) {
     .produtos-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -348,5 +350,23 @@ body {
 @media (min-width: 992px) {
     .produtos-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- NOVA REGRA PARA RESPONSIVIDADE DO CABEÇALHO --- */
+@media (max-width: 600px) {
+    .cabecalho .container {
+        flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+        justify-content: center; /* Centraliza os itens quando quebram a linha */
+        gap: 1rem; /* Adiciona um espaço entre a logo e os botões quando quebram */
+    }
+
+    .logo img {
+        height: 70px; /* Diminui a altura da logo em telas pequenas */
+    }
+
+    .btn-nav {
+        padding: 0.5rem 1.2rem; /* Diminui o padding dos botões */
+        font-size: 0.9rem; /* Diminui a fonte dos botões */
     }
 }
