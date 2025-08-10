@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- LÓGICA DO POPUP DE DETALHES DO PRODUTO ---
-    const linkInstagram = "https://www.instagram.com/SEUUSUARIO";
+    const linkInstagram = "https://www.instagram.com/mermaid_cajazeiras";
 
     const popupOverlay = document.getElementById('popup-overlay');
     const btnFecharPopup = document.getElementById('btn-fechar-popup');
