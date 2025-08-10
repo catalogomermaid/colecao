@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -24,8 +26,12 @@
                 <img src="imagens/logo.png" alt="Logo Mermaid">
             </a>
             <nav class="nav-contato">
-                <a href="https://wa.me/message/32MWJQCN7ZTIM1" target="_blank" class="btn-nav btn-nav-whatsapp">WhatsApp</a>
-                <a href="https://www.instagram.com/mermaid_cajazeiras" target="_blank" class="btn-nav btn-nav-instagram">Instagram</a>
+                <a href="https://wa.me/message/32MWJQCN7ZTIM1" target="_blank" class="btn-nav btn-nav-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/mermaid_cajazeiras" target="_blank" class="btn-nav btn-nav-instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
             </nav>
         </div>
     </header>
@@ -212,6 +218,9 @@
     <div id="popup-overlay" class="popup-overlay">
         <div class="popup-card">
             <button id="btn-fechar-popup" class="btn-fechar-popup">&times;</button>
+            <button id="btn-prev" class="popup-nav-arrow prev">&lt;</button>
+            <button id="btn-next" class="popup-nav-arrow next">&gt;</button>
+
             <img id="popup-img" src="" alt="Imagem do Produto">
             <h3 id="popup-titulo"></h3>
             <p id="popup-descricao"></p>
