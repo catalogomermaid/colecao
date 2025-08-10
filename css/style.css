@@ -1,0 +1,352 @@
+/* Importação das fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Pacifico&display=swap');
+
+/* --- Variáveis de Cor (Tema Sereia) --- */
+:root {
+    --cor-rosa: #f8c5dd;
+    --cor-azul: #a7d8f9;
+    --cor-lilas: #dcd0ff;
+    --cor-fundo: #fdf6ff;
+    --cor-texto: #333;
+    --cor-branco: #fff;
+    --gradiente-sereia: linear-gradient(120deg, var(--cor-rosa), var(--cor-azul), var(--cor-lilas));
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Estilos Base e Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Cabeçalho --- */
+.cabecalho {
+    background: var(--cor-branco);
+    padding: 1rem 0;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.cabecalho .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 100px; 
+    display: block;
+}
+
+/* --- ESTILOS DOS NOVOS BOTÕES DE NAVEGAÇÃO --- */
+.nav-contato {
+    display: flex;
+    gap: 1rem; /* Espaçamento entre os botões */
+}
+
+.btn-nav {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--cor-branco);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-nav:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-nav-whatsapp {
+    background-color: #25D366;
+}
+
+.btn-nav-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+
+/* --- Seção de Destaque --- */
+.destaque {
+    background: var(--gradiente-sereia);
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 6rem 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.destaque h2 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-destaque {
+    display: inline-block;
+    background: var(--cor-branco);
+    color: var(--cor-rosa);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-destaque:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* --- Seção do Catálogo --- */
+.catalogo {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.catalogo h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--cor-texto);
+}
+
+.categorias-filtro {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-categoria {
+    background: none;
+    border: 2px solid var(--cor-lilas);
+    color: var(--cor-lilas);
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-categoria:hover, .btn-categoria.ativo {
+    background: var(--cor-lilas);
+    color: var(--cor-branco);
+}
+
+
+/* --- Grade de Produtos (Responsiva) --- */
+.produtos-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+}
+
+.produto-card {
+    background: var(--cor-branco);
+    border-radius: 15px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.produto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.produto-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.produto-card h3 {
+    font-size: 1.4rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.produto-descricao {
+    padding: 0 1.5rem;
+    flex-grow: 1;
+    font-size: 0.9rem;
+}
+
+.produto-preco {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-azul);
+    margin: 1rem 0;
+}
+
+.btn-detalhes {
+    background: var(--gradiente-sereia);
+    color: var(--cor-branco);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.btn-detalhes:hover {
+    opacity: 0.9;
+}
+
+
+/* --- ESTILOS DO POPUP --- */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.popup-card {
+    background: var(--cor-branco);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.popup-card img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.btn-fechar-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+.btn-fechar-popup:hover {
+    color: #333;
+}
+
+.popup-cores-container {
+    margin: 1.5rem 0 1rem;
+    text-align: left;
+}
+.popup-cores-container h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--cor-texto);
+    text-align: center;
+}
+.popup-cores {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.cor-opcao {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+}
+
+
+.popup-contato {
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+.popup-contato p {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.popup-contato a {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    color: var(--cor-branco);
+    border-radius: 25px;
+    margin: 0.25rem;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+.popup-contato a:hover {
+    transform: scale(1.05);
+}
+
+.btn-social-whatsapp {
+    background-color: #25D366;
+}
+.btn-social-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+
+/* --- Rodapé --- */
+.rodape {
+    background: var(--cor-lilas);
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+/* --- RESPONSIVIDADE (Mobile-First) --- */
+@media (min-width: 600px) {
+    .produtos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .produtos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
