@@ -62,16 +62,14 @@ body {
 }
 
 .btn-nav {
-    width: 45px;  /* Largura do botão */
-    height: 45px; /* Altura do botão */
-    border-radius: 50%; /* Deixa o botão redondo */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     text-decoration: none;
     color: var(--cor-branco);
-    font-size: 22px; /* Tamanho do ícone */
+    font-size: 22px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    
-    /* Centraliza o ícone dentro do círculo */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +288,7 @@ body {
 .popup-card img {
     width: 100%;
     max-height: 400px;
-    object-fit: cover;
+    object-fit: contain; /* <--- MUDANÇA PRINCIPAL AQUI */
     border-radius: 10px;
     margin-bottom: 1rem;
 }
@@ -401,7 +399,6 @@ body {
         height: 70px;
     }
 
-    /* Ajuste para ícones do cabeçalho em telas menores */
     .btn-nav {
         width: 40px;
         height: 40px;
